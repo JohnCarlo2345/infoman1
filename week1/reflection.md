@@ -1,0 +1,5 @@
+# Reflection — Lab 1
+
+Installing MySQL demonstrates key advantages of the database approach over file-based systems. Unlike spreadsheets or separate files that store duplicate copies of the same information, MySQL maintains one central, shared source of data. This eliminates uncontrolled redundancy — when information is updated, it changes everywhere at once rather than leaving conflicting versions across multiple files. A DBMS also enforces data consistency, integrity rules, and access controls that file systems cannot provide on their own.
+
+Once this database stores real student data, the most relevant DBA responsibility would be **data security and access control**. Student records contain sensitive personal information, so the DBA must manage user permissions, restrict who can view or modify data, and ensure compliance with privacy standards. Without proper access management, anyone could view or alter sensitive records — a risk that centralized databases must actively prevent.
