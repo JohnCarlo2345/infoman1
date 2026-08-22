@@ -3,7 +3,7 @@
 **Student ID:** 2511004
 **Section:** BSIT-II
 
-Task 1 — Extract Candidate Entities
+# Task 1 — Extract Candidate Entities
  
 Customer
 - A customer is a person who brings one or more cars to the shop for repair. It has its own contact details and exists independently, so it qualifies as an entity rather than an attribute.
@@ -17,7 +17,7 @@ Mechanic
 Service Appointment
 - A service appointment is a scheduled repair event with a date and a repair note. It connects a specific car and a specific mechanic at a specific time, so it qualifies as a separate entity rather than an attribute.
  
-Task 2 — Define Attributes per Entity
+# Task 2 — Define Attributes per Entity
  
 Customer
  
@@ -51,7 +51,7 @@ Service Appointment
 - service_date: calendar date value
 - repair_note: longer text describing the work performed
  
-Task 3 — Identify and Classify Relationships
+# Task 3 — Identify and Classify Relationships
  
 Verb phrase: "owns / belongs to" — Customer and Car
  
