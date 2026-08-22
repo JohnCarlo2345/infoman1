@@ -1,3 +1,8 @@
+INFOMAN1 - week 2 lab: Conceptual ERD case study
+Name: John Carlo Valdez
+Student ID: 2511004
+Section: BSIT-II
+
 Task 1 — Extract Candidate Entities
  
 Customer
