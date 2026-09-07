@@ -4,7 +4,7 @@
 ## Course/year: BSIT-II ##
 ## Subject: Infoman1 ##
 
-Task 1 — Attribute Classification & Weak Entity Identification
+## Task 1 — Attribute Classification & Weak Entity Identification ##
  
 ## Attribute Classification ##
  
@@ -16,7 +16,7 @@ Task 1 — Attribute Classification & Weak Entity Identification
 
 Vaccination Record is a weak entity. It does not have its own unique identifier, it cannot exist without being linked to a Pet, and it depends entirely on Pet for its identity. It uses a partial key combined with the parent entity's primary key instead of having a primary key of its own.
  
-Task 2 — Cardinality & Participation
+## Task 2 — Cardinality & Participation ##
  
 ## Owner ↔ Pet ##
  
@@ -38,7 +38,7 @@ Task 2 — Cardinality & Participation
 - Pet to Vaccination Record: Zero or Many — a pet may have no vaccinations or multiple vaccination records
 - Vaccination Record to Pet: Exactly One — every vaccination record belongs to one pet and cannot exist on its own
  
-Task 3 — ERD Design Notes
+## Task 3 — ERD Design Notes ##
  
 ## Entities ##
  
