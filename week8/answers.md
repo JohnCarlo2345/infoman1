@@ -9,42 +9,34 @@ Dataset check:  SELECT COUNT(*) FROM employee;  returned: 500
 
 ## Task 1 – Pattern Matching Basics
 
-Approach / explanation:
+**Approach / explanation:**
 Used the LIKE operator with  %  and  _  wildcards to search for text patterns.  %  matches any sequence of characters while  _  matches exactly one character, allowing me to filter records based on partial matches.
 
-Code / query used:
- 
-sql  
--- 1.1 Last name ends with ez
-SELECT emp_id, first_name, last_name
+**Code / query used:**
+
+sql
+```SELECT emp_id, first_name, last_name
 FROM employee
 WHERE last_name LIKE '%ez';
- 
- 
-sql  
--- 1.2 First name starts with Ma
+
+sql
 SELECT emp_id, first_name, department
 FROM employee
 WHERE first_name LIKE 'Ma%';
- 
- 
-sql  
--- 1.3a Codes starting with E (5 characters total)
+
+sql
 SELECT emp_code, first_name, last_name
 FROM employee
 WHERE emp_code LIKE 'E____';
- 
- 
-sql  
--- 1.3b Codes with 0 as the 3rd character
+
+sql
 SELECT emp_code, first_name, last_name
 FROM employee
 WHERE emp_code LIKE 'E_0__';
- 
- 
+
 Evidence:
- 
-- 1.1 Output:
+
+1.1 Output:
 +--------+------------+-----------+
 | emp_id | first_name | last_name |
 +--------+------------+-----------+
@@ -210,8 +202,10 @@ Evidence:
 |    497 | Mario      | Sanchez   |
 |    500 | Jose       | Martinez  |
 +--------+------------+-----------+
-— Row count: 161
-- 1.2 Output:
+
+Row count: 161
+
+1.2 Output:
 +--------+------------+-------------+
 | emp_id | first_name | department  |
 +--------+------------+-------------+
@@ -328,7 +322,9 @@ Evidence:
 |    488 | Marcus     | Sales       |
 |    497 | Mario      | Support     |
 +--------+------------+-------------+
-— Row count: 112
+
+- Row count: 112
+
 - 1.3a Output:
 +----------+------------+------------+
 | emp_code | first_name | last_name  |
@@ -834,8 +830,10 @@ Evidence:
 | E3350    | Nina       | Chua       |
 | E3019    | Jose       | Martinez   |
 +----------+------------+------------+
-— Row count: 500
-- 1.3b Output:
+
+Row count: 500
+
+1.3b Output:
 +----------+------------+------------+
 | emp_code | first_name | last_name  |
 +----------+------------+------------+
@@ -888,69 +886,62 @@ Evidence:
 | E8066    | Olivia     | Chua       |
 | E3019    | Jose       | Martinez   |
 +----------+------------+------------+
-— Row count: 48
- 
+
+Row count: 48
+
 Reflection question:
 Why do we use the '%' wildcard instead of the '_' wildcard when searching for fields containing a specific keyword?
- 
+
 The  %  wildcard matches zero or more characters, so it finds the keyword anywhere in the text regardless of length. The  _  wildcard matches exactly one character only, so it cannot be used to locate a keyword of variable length.
- 
- 
- 
+
 ## Task 2 – Basic Aggregation
- 
+
 Approach / explanation:
 Used aggregate functions to calculate totals, counts, averages, and date extremes across the whole table. COUNT(*) vs COUNT(column) revealed NULL values, and COALESCE handled those NULLs so every employee was included in compensation calculations.
- 
+
 Code / query used:
- 
-sql  
--- 2.1 Total vs commission earners
+
+sql
 SELECT COUNT(*) AS total_employees,
        COUNT(commission) AS employees_with_commission
 FROM employee;
- 
- 
-sql  
--- 2.2 Total monthly payroll
+
+sql
 SELECT SUM(salary) AS total_monthly_payroll
 FROM employee;
- 
- 
-sql  
--- 2.3 Average salary + earliest/latest hire dates
+
 SELECT AVG(salary) AS average_salary,
        MIN(hire_date) AS earliest_hire_date,
        MAX(hire_date) AS latest_hire_date
 FROM employee;
- 
- 
-sql  
--- 2.4 Total compensation (treat NULL commission as 0)
+
+sql
 SELECT SUM(salary + COALESCE(commission, 0)) AS total_compensation
 FROM employee;
- 
- 
+
 Evidence:
- 
+
 - 2.1 Output:
 +-----------------+---------------------------+
 | total_employees | employees_with_commission |
 +-----------------+---------------------------+
 |             500 |                       352 |
 +-----------------+---------------------------+
+
 - 2.2 Output:
 +-----------------------+
 | total_monthly_payroll |
 +-----------------------+
 |           33282250.00 |
 +-----------------------+
+
 - 2.3 Output:
 +----------------+--------------------+------------------+
 | average_salary | earliest_hire_date | latest_hire_date |
 +----------------+--------------------+------------------+
 |   66564.500000 | 2015-01-03         | 2026-09-14       |
 +----------------+--------------------+------------------+
+
 - 2.4 Output:
 +--------------------+
 | total_compensation |
@@ -960,20 +951,17 @@ Evidence:
 
 Reflection question:
 What is the difference between  COUNT(*)  and  COUNT(column_name) ?
- 
+
  COUNT(*)  counts all rows including those with NULL values.  COUNT(column_name)  counts only rows where that column is NOT NULL. The gap in 2.1 shows how many employees have no commission recorded. COALESCE was needed in 2.4 because  salary + NULL  returns NULL — replacing NULL commission with 0 ensures every employee is included in the total.
- 
- 
- 
+
 ## Task 3 – Grouping Data
- 
+
 Approach / explanation:
 Used GROUP BY to organize employees into groups by department, then by department plus job title. Aggregate functions calculated statistics per group instead of across the whole table, and COUNT(DISTINCT) found unique job titles within each department.
- 
+
 Code / query used:
- 
-sql  
--- 3.1 Per department stats
+
+sql
 SELECT department,
        COUNT(*) AS headcount,
        AVG(salary) AS average_salary,
@@ -981,8 +969,7 @@ SELECT department,
 FROM employee
 GROUP BY department;
 
-sql  
--- 3.2 Per department + job title
+sql
 SELECT department, job_title,
        COUNT(*) AS headcount,
        AVG(salary) AS average_salary
@@ -990,7 +977,7 @@ FROM employee
 GROUP BY department, job_title;
 
 Evidence:
- 
+
 - 3.1 Output:
 +-------------+-----------+----------------+-------------------+
 | department  | headcount | average_salary | unique_job_titles |
@@ -1001,6 +988,7 @@ Evidence:
 | Sales       |       144 |   71799.652778 |                 3 |
 | Support     |       112 |   44028.571429 |                 3 |
 +-------------+-----------+----------------+-------------------+
+
 - 3.2 Output:
 +-------------+----------------------+-----------+----------------+
 | department  | job_title            | headcount | average_salary |
@@ -1021,10 +1009,10 @@ Evidence:
 | Finance     | Accountant           |        21 |   48661.904762 |
 | Support     | Support Agent        |        40 |   31805.000000 |
 +-------------+----------------------+-----------+----------------+
- 
+
 Reflection question:
 Why is it generally invalid to include columns in the SELECT list that are not in the GROUP BY clause, unless they are inside an aggregate function?
- 
+
 After grouping, each group becomes one row. A column not in GROUP BY might have different values within that group — the database wouldn't know which value to show. Only grouped columns or aggregated values have exactly one result per group, so those are valid.
 
 ## Task 4 – Advanced Filtering with HAVING
@@ -1035,24 +1023,20 @@ Grouped data and calculated averages per department, then used HAVING to filter 
 Code / query used:
 
 sql
--- 4.1 Departments above average salary threshold
 SELECT department, AVG(salary) AS average_salary
 FROM employee
 GROUP BY department
 HAVING AVG(salary) > 60000;
- 
- 
-sql  
--- 4.2 Active employees only — large departments
+
+sql
 SELECT department, COUNT(*) AS headcount
 FROM employee
 WHERE status = 'Active'
 GROUP BY department
 HAVING COUNT(*) > 50;
- 
- 
+
 Evidence:
- 
+
 - 4.1 Threshold cho0sen: 60000 — Reason: Based on Task 3.1 results, this clearly separates higher from lower-paying departments.
 - Output:
 +-------------+----------------+
@@ -1063,6 +1047,7 @@ Evidence:
 | HR          |   62610.000000 |
 | Finance     |   79513.043478 |
 +-------------+----------------+
+
 - 4.2 Output:
 +-------------+-----------+
 | department  | headcount |
@@ -1072,15 +1057,15 @@ Evidence:
 | Finance     |        52 |
 | Support     |        99 |
 +-------------+-----------+
- 
+
 Reflection question:
 Why must we use the HAVING clause here instead of the WHERE clause to filter by the average value?
- 
+
 WHERE filters individual rows before grouping — it doesn't know about calculated values like AVG(). HAVING runs after grouping and aggregation, so it's the only way to filter based on results from aggregate functions.
 
 Self-Check
- 
+
 All tasks committed with individual, meaningful commit messages
-All files placed inside  week08/ 
-This file completed and renamed  answers.md 
+All files placed inside  week08/
+This file completed and renamed  answers.md
 Repository link pasted into Moodle (no files uploaded)
