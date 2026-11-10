@@ -3,7 +3,7 @@
 **Name:** John Carlo Valdez
 **Student ID:** 2511004
 **GitHub repo:** https://github.com/JohnCarlo2345/infoman1
-**Date submitted:** October 21, 2026
+**Date submitted:** October 19, 2026
 
 ## Task 1 — INNER JOIN Basics
 

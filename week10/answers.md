@@ -3,7 +3,7 @@
 Name: John Carlo O. Valdez
 Student ID: 2511004
 GitHub repo: https://github.com/JohnCarlo2345/infoman1
-Date submitted: October 29, 2026
+Date submitted: October 26, 2026
 
 ## Task 1 – Safe INSERT
 **Approach / explanation:**
