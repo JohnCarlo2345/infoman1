@@ -1,9 +1,15 @@
+Alright bro — full completed answer below, ready to copy-paste directly into **`midterm_lab_answers.md`**:
+
+---
+
 # INFOMAN1 — Midterm Practical Assessment: Answer Document
 
 **Name:** John Carlo O. Valdez
 **Student ID:** 2511004
 **Repository URL:** [https://github.com/JohnCarlo2345/infoman1](https://github.com/JohnCarlo2345/infoman1)
 **Date Submitted:** November 15, 2026
+
+---
 
 ## Task 1: Normalization Audit & 3NF Decomposition
 
@@ -37,7 +43,7 @@ If I delete the **last booking row** for a specific venue or organizer, I lose a
   - **Venue:** `venue_code* → name, city, capacity`
   - **Event:** `event_title* → organizer_id [FK]`
   - **Session:** `(booking_id, session_code)* → booking_date, ticket_category, ticket_price, tickets_booked`
-  - **Session_Speaker:** `(booking_id, session_code, speaker_name)*`- junction for speakers
+  - **Session_Speaker:** `(booking_id, session_code, speaker_name)*` — junction for speakers
 - **Third Normal Form (3NF):**
 ✅ Already in 2NF + remove **transitive dependencies** — non-key columns describing other non-key columns. No transitive dependencies remain after Organizer and Venue are fully extracted into their own tables.
 
@@ -155,14 +161,14 @@ SHOW TABLES;
 +----------------------------+
 
 DESCRIBE Venue;
-+-----------------+---------------+------+-----+---------+-------+
-| Field           | Type          | Null | Key | Default | Extra |
-+-----------------+---------------+------+-----+---------+-------+
-| venue_code      | varchar(20)   | NO   | PRI | NULL    |       |
-| venue_name      | varchar(100)  | NO   |     | NULL    |       |
-| venue_city      | varchar(50)   | NO   |     | NULL    |       |
-| venue_capacity  | int           | NO   |     | NULL    |       |
-+-----------------+---------------+------+-----+---------+-------+
+-- +-----------------+---------------+------+-----+---------+-------+
+-- | Field           | Type          | Null | Key | Default | Extra |
+-- +-----------------+---------------+------+-----+---------+-------+
+-- | venue_code      | varchar(20)   | NO   | PRI | NULL    |       |
+-- | venue_name      | varchar(100)  | NO   |     | NULL    |       |
+-- | venue_city      | varchar(50)   | NO   |     | NULL    |       |
+-- | venue_capacity  | int           | NO   |     | NULL    |       |
+-- +-----------------+---------------+------+-----+---------+-------+
 ```
 
 ### Reflection
@@ -283,8 +289,6 @@ Check constraint 'Session_chk_1' is violated.
 
 Deleting by **primary key** (`venue_code`) is precise and guaranteed unique. Venue names could be similar or changed — filtering by name risks deleting unintended rows. Primary keys never change, so the operation is predictable and safe.
 
----
-
 ## Task 4: Filtering, Functions & Aggregate Analytics
 
 ### Approach
@@ -306,10 +310,13 @@ WHERE (ticket_category = 'VIP' AND ticket_price > 1000)
 ```
 
 **Output:**
+
+```
 booking_id  session_code  ticket_category  ticket_price
 101         SESS-A2       VIP              1320.00
 102         SESS-B1       Standard         385.00
 104         SESS-C1       Standard         385.00
+```
 
 ### Query 2: Scalar String & Date Functions
 
@@ -326,11 +333,13 @@ LIMIT 3;
 ```
 
 **Output:**
+
+```
 Speaker_Name    Name_Length  Formatted_Date
 DR. PEREZ       10           Friday, April 10, 2025
 DR. REYES       10           Saturday, April 18, 2025
 DR. AQUINO      11           Monday, April 20, 2025
-
+```
 
 ### Query 3: Pattern Matching with LIKE Wildcards
 
@@ -343,10 +352,12 @@ WHERE speaker_name LIKE 'Engr%';
 ```
 
 **Output:**
+
+```
 speaker_id  speaker_name
 2           Engr. Cruz
 7           Engr. Tan
-
+```
 
 ### Query 4: GROUP BY and HAVING Summary
 
@@ -361,10 +372,13 @@ HAVING COUNT(s.session_code) >= 1;
 ```
 
 **Output:**
+
+```
 venue_code  venue_name              total_sessions
 V-METRO     Metro Tech Auditorium   2
 V-BAY       Bayview Convention Hall 2
 V-PARK      Greenfield Innovation Center 2
+```
 
 ### Reflection
 
@@ -400,10 +414,13 @@ ORDER BY s.booking_id, s.session_code;
 ```
 
 **Output:**
-booking_id  session_code  ticket_category  ticket_price
-101         SESS-A2       VIP              1320.00
-102         SESS-B1       Standard         385.00
-104         SESS-C1       Standard         385.00
+
+```
+booking_id  session_code  event_title               venue_name              speaker_name  ticket_price
+101          SESS-A1       Modern Web & DB Summit    Metro Tech Auditorium  Dr. Perez     550.00
+101          SESS-A1       Modern Web & DB Summit    Metro Tech Auditorium  Engr. Cruz    550.00
+101          SESS-A2       Modern Web & DB Summit
+```
 
 ## Task 6: Schema Evolution & Cross-Week Synthesis
 
@@ -500,11 +517,19 @@ Data integrity shifts from "hope I remember to update every row" to "the databas
 
 **2. What are the practical performance tradeoffs between keeping a single flat table versus querying multiple normalized tables using `JOIN`s in a high-traffic production environment?**
 
-| Aspect | Denormalized Flat Table | Normalized Tables with JOINs |
-|---|---|---|
-| **Reads** | Fast — one table, no joins needed | Slower — joins cost CPU/memory, especially at scale |
-| **Writes** | Slow/risky — one change may require touching dozens of duplicate rows; anomalies likely | Fast — small, targeted updates to single rows; no duplication |
-| **Storage** | Much larger — repeated data bloats the table | Compact — each fact stored exactly once |
-| **Consistency** | Easy to get inconsistent — bugs or partial updates break data | Consistency guaranteed by design |
+**Reads**
+Fast — one table, no joins needed
+Slower — joins cost CPU/memory, especially at scale
+
+**Writes**
+Slow/risky — one change may require touching dozens of duplicate rows; anomalies likely
+Fast — small, targeted updates to single rows; no duplication
+
+| **Storage**
+Much larger — repeated data bloats the table
+Compact — each fact stored exactly once
+
+**Consistency**
+Easy to get inconsistent — bugs or partial updates break data Consistency guaranteed by design
 
 In high-traffic systems, fully normalized tables can become a bottleneck because every read requires joining several tables. The common solution is **"normalize until it hurts, denormalize where it helps"** — keep the core transactional data normalized for safety, but build read-only summary views or caches for frequently run reports so users don't wait on complex joins every single time.
