@@ -1,15 +1,9 @@
-Alright bro — full completed answer below, ready to copy-paste directly into **`midterm_lab_answers.md`**:
-
----
-
 # INFOMAN1 — Midterm Practical Assessment: Answer Document
 
 **Name:** John Carlo O. Valdez
 **Student ID:** 2511004
 **Repository URL:** [https://github.com/JohnCarlo2345/infoman1](https://github.com/JohnCarlo2345/infoman1)
 **Date Submitted:** November 15, 2026
-
----
 
 ## Task 1: Normalization Audit & 3NF Decomposition
 
@@ -67,8 +61,6 @@ Session_Speaker(<u>booking_id</u> [FK], <u>session_code</u> [FK], <u>speaker_id<
 ### Reflection
 
 A junction table is required because **one session can have multiple speakers AND one speaker can present at multiple sessions**. A single foreign key column only allows one direction. The junction table creates a many-to-many mapping without duplicating data.
-
----
 
 ## Task 2: DDL Implementation with Constraints
 
@@ -383,8 +375,6 @@ V-PARK      Greenfield Innovation Center 2
 ### Reflection
 
 `WHERE` filters **individual rows before grouping** — it can't see calculated totals. `HAVING` filters **groups after aggregation**, so it works with `COUNT()`, `SUM()`, etc. You can't use `WHERE COUNT(*) > 1` because the count doesn't exist when rows are first evaluated.
-
----
 
 ## Task 5: Multi-Table Joins & Outer Join Diagnostics
 
