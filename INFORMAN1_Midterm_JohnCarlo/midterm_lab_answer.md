@@ -508,18 +508,18 @@ Data integrity shifts from "hope I remember to update every row" to "the databas
 **2. What are the practical performance tradeoffs between keeping a single flat table versus querying multiple normalized tables using `JOIN`s in a high-traffic production environment?**
 
 * Reads:
-* Fast - one table, no joins needed
-* Slower - joins cost CPU/memory, especially at scale
+- Fast - one table, no joins needed
+- Slower - joins cost CPU/memory, especially at scale
 
 * Writes:
-* Slow/risky - one change may require touching dozens of duplicate rows; anomalies likely
-* Fast - small, targeted updates to single rows; no duplication
+- Slow/risky - one change may require touching dozens of duplicate rows; anomalies likely
+- Fast - small, targeted updates to single rows; no duplication
 
 * Storage:
-* Much larger - repeated data bloats the table
-* Compact - each fact stored exactly once
+- Much larger - repeated data bloats the table
+- Compact - each fact stored exactly once
 
 * Consistency:
-* Easy to get inconsistent - bugs or partial updates break data Consistency guaranteed by design
+- Easy to get inconsistent - bugs or partial updates break data Consistency guaranteed by design
 
 In high-traffic systems, fully normalized tables can become a bottleneck because every read requires joining several tables. The common solution is **"normalize until it hurts, denormalize where it helps"** — keep the core transactional data normalized for safety, but build read-only summary views or caches for frequently run reports so users don't wait on complex joins every single time.
