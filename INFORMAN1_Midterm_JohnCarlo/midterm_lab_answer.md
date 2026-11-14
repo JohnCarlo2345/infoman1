@@ -400,22 +400,10 @@ ORDER BY s.booking_id, s.session_code;
 ```
 
 **Output:**
-
-+------------+--------------+-----------------------------+------------------------------+--------------+--------------+
-| booking_id | session_code | event_title                 | venue_name                   | speaker_name | ticket_price |
-+------------+--------------+-----------------------------+------------------------------+--------------+--------------+
-|        101 | SESS-A1      | Modern Web & DB Summit      | Metro Tech Auditorium        | Dr. Perez    |       500.00 |
-|        101 | SESS-A1      | Modern Web & DB Summit      | Metro Tech Auditorium        | Engr. Cruz   |       500.00 |
-|        101 | SESS-A2      | Modern Web & DB Summit      | Metro Tech Auditorium        | Engr. Cruz   |      1200.00 |
-|        102 | SESS-B1      | Urban Ecology Seminar       | Bayview Convention Hall      | Prof. Santos |       350.00 |
-|        103 | SESS-A1      | AI & Cloud Infrastructure   | Metro Tech Auditorium        | Dr. Perez    |       250.00 |
-|        103 | SESS-A1      | AI & Cloud Infrastructure   | Metro Tech Auditorium        | Ms. Lim      |       250.00 |
-|        104 | SESS-C1      | Community Climate Action    | Bayview Convention Hall      | Prof. Santos |       350.00 |
-|        104 | SESS-C1      | Community Climate Action    | Bayview Convention Hall      | Dr. Reyes    |       350.00 |
-|        105 | SESS-D1      | Health Informatics 2025     | Greenfield Innovation Center | Dr. Aquino   |      1500.00 |
-|        106 | SESS-D2      | Telemedicine Implementation | Greenfield Innovation Center | Dr. Aquino   |       600.00 |
-|        106 | SESS-D2      | Telemedicine Implementation | Greenfield Innovation Center | Engr. Tan    |       600.00 |
-+------------+--------------+-----------------------------+------------------------------+--------------+--------------+
+booking_id  session_code  ticket_category  ticket_price
+101         SESS-A2       VIP              1320.00
+102         SESS-B1       Standard         385.00
+104         SESS-C1       Standard         385.00
 
 ## Task 6: Schema Evolution & Cross-Week Synthesis
 
