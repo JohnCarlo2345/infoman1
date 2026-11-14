@@ -400,6 +400,7 @@ ORDER BY s.booking_id, s.session_code;
 ```
 
 **Output:**
+
 +------------+--------------+-----------------------------+------------------------------+--------------+--------------+
 | booking_id | session_code | event_title                 | venue_name                   | speaker_name | ticket_price |
 +------------+--------------+-----------------------------+------------------------------+--------------+--------------+
@@ -415,7 +416,6 @@ ORDER BY s.booking_id, s.session_code;
 |        106 | SESS-D2      | Telemedicine Implementation | Greenfield Innovation Center | Dr. Aquino   |       600.00 |
 |        106 | SESS-D2      | Telemedicine Implementation | Greenfield Innovation Center | Engr. Tan    |       600.00 |
 +------------+--------------+-----------------------------+------------------------------+--------------+--------------+
-11 rows in set (0.039 sec)
 
 ## Task 6: Schema Evolution & Cross-Week Synthesis
 
