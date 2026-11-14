@@ -153,14 +153,14 @@ SHOW TABLES;
 +----------------------------+
 
 DESCRIBE Venue;
--- +-----------------+---------------+------+-----+---------+-------+
--- | Field           | Type          | Null | Key | Default | Extra |
--- +-----------------+---------------+------+-----+---------+-------+
--- | venue_code      | varchar(20)   | NO   | PRI | NULL    |       |
--- | venue_name      | varchar(100)  | NO   |     | NULL    |       |
--- | venue_city      | varchar(50)   | NO   |     | NULL    |       |
--- | venue_capacity  | int           | NO   |     | NULL    |       |
--- +-----------------+---------------+------+-----+---------+-------+
++-----------------+---------------+------+-----+---------+-------+
+| Field           | Type          | Null | Key | Default | Extra |
++-----------------+---------------+------+-----+---------+-------+
+| venue_code      | varchar(20)   | NO   | PRI | NULL    |       |
+| venue_name      | varchar(100)  | NO   |     | NULL    |       |
+| venue_city      | varchar(50)   | NO   |     | NULL    |       |
+| venue_capacity  | int           | NO   |     | NULL    |       |
++-----------------+---------------+------+-----+---------+-------+
 ```
 
 ### Reflection
