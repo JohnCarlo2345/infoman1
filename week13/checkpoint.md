@@ -2,8 +2,7 @@
 
 ## MYSQL QUERY RESULTS SHOWN IN DEMONSTRATION
 
-1. **SELECT * FROM table_1;**
-
+- SELECT * FROM table_1;
 +----+----------+
 | id | field    |
 +----+----------+
@@ -11,8 +10,7 @@
 |  2 | Record 2 |
 +----+----------+
 
-2. **SELECT * FROM table_2;**
-
+- SELECT * FROM table_2;
 +----+------------+----------+
 | id | table_1_id | field    |
 +----+------------+----------+
@@ -20,8 +18,7 @@
 |  2 |          2 | Record B |
 +----+------------+----------+
 
-3. **SELECT * FROM table_3;**
-
+- SELECT * FROM table_3;
 +----+------------+----------+
 | id | table_2_id | field    |
 +----+------------+----------+
@@ -29,8 +26,7 @@
 |  2 |          2 | Record Y |
 +----+------------+----------+
 
-4. **SELECT * FROM vw_summary_report;**
-
+- SELECT * FROM vw_summary_report;
 +-------+----------+-------+----------+-------+----------+
 | t1_id | t1_field | t2_id | t2_field | t3_id | t3_field |
 +-------+----------+-------+----------+-------+----------+
